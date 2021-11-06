@@ -79,6 +79,45 @@ namespace TurnUpPortalFirstAutomation
                 Console.WriteLine("New record did not find hence test case is failed");
             }
 
+            // Click on last page of the table again
+            lastPageButton.Click();
+
+            //Click on editButton
+            IWebElement editButton = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[last()]/a[1]"));
+            editButton.Click();
+            Thread.Sleep(2000);
+
+            //clear the previous input from codeTextBox
+                IWebElement coTextBox = driver.FindElement(By.Id("Code"));
+                 coTextBox.Clear();
+
+            // Change the codeTextBox input to ShaAutomation22
+            coTextBox.SendKeys("ShaAutomation22");
+
+
+            //Click on saveButton
+            IWebElement saveButtons = driver.FindElement(By.Id("SaveButton"));
+            saveButtons.Click();
+            Thread.Sleep(2000);
+
+            // Click on last page of the table again
+            IWebElement lastPaButton = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]/span"));
+            lastPaButton.Click();
+
+            //Thread.Sleep(2000);
+            //Click on Delete Button
+            IWebElement deletButton = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[2]/td[last()]/a[last()]"));
+            deletButton.Click();
+
+
+            driver.SwitchTo().Alert().Accept();
+
+
+
+
+
+
+
 
 
 
