@@ -1,4 +1,5 @@
 ﻿
+using NUnit.Framework;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using TurnUpPortalFirstAutomation.Utilities;
 
 namespace TurnUpPortalFirstAutomation.Pages
 {
-    class LoginPage
+    public class LoginPage 
     {
         public void loginSteps(IWebDriver driver)
 
@@ -17,17 +18,25 @@ namespace TurnUpPortalFirstAutomation.Pages
             //launch turn up portal
             driver.Navigate().GoToUrl("http://horse.industryconnect.io/Account/Login?ReturnUrl=%2f");
             //identify the user name textbox and enter vald username
-            IWebElement userName = driver.FindElement(By.XPath("//input[@id='UserName']"));
-            userName.SendKeys("hari");
 
-            Wait.waitTobeVisible(driver, "XPath", "//input[@id='Password']", 3);
+            try
+            {
+                IWebElement userName = driver.FindElement(By.XPath("//input[@id='UserName']"));
+                userName.SendKeys("hari");
 
-            //identify password testbox and enter valid password
-            IWebElement pwdTextbox = driver.FindElement(By.XPath("//input[@id='Password']"));
-            pwdTextbox.SendKeys("123123");
-            //identify the loginButton and click
-            IWebElement loginButton = driver.FindElement(By.XPath("//input[@value='Log in']"));
-            loginButton.Click();
+                Wait.waitTobeVisible(driver, "XPath", "//input[@id='Password']", 3);
+
+                //identify password testbox and enter valid password
+                IWebElement pwdTextbox = driver.FindElement(By.XPath("//input[@id='Password']"));
+                pwdTextbox.SendKeys("123123");
+                //identify the loginButton and click
+                IWebElement loginButton = driver.FindElement(By.XPath("//input[@value='Log in']"));
+                loginButton.Click();
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail("TurnUp portal home page did not launch", ex.Message);
+            }
         }
     }
 }
