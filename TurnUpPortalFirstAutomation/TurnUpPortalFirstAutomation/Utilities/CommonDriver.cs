@@ -10,7 +10,7 @@ namespace TurnUpPortalFirstAutomation.Utilities
 {
     public class CommonDriver
     {
-        public static IWebDriver driver;
+        public IWebDriver driver;
         //open the chrome Browser
 
         [OneTimeSetUp]

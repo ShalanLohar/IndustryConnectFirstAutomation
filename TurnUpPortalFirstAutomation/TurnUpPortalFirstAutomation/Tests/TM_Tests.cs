@@ -9,7 +9,7 @@ using TurnUpPortalFirstAutomation.Utilities;
 namespace TurnUpPortalFirstAutomation
 {
     [TestFixture]
-    //[Parallelizable]
+    [Parallelizable]
     class TM_Test : CommonDriver
     {    
         
@@ -17,7 +17,7 @@ namespace TurnUpPortalFirstAutomation
         public void CreateTMTests()
         {
             //Homepage object initialization and definition
-            homePage homePageobj = new homePage();
+           homePage homePageobj = new homePage();
             homePageobj.navigateTotmPortal(driver);
 
             //TMpage object initialization and definition
@@ -30,8 +30,8 @@ namespace TurnUpPortalFirstAutomation
         public void EditTMTest()
         {
             //Homepage object initialization and definition
-            homePage homePageobj = new homePage();
-            homePageobj.navigateTotmPortal(driver);
+            //homePage homePageobj = new homePage();
+            //homePageobj.navigateTotmPortal(driver);
 
             TMpage TMpageObj = new TMpage();
             TMpageObj.editRecord(driver);
@@ -42,8 +42,8 @@ namespace TurnUpPortalFirstAutomation
         public void DeleteTMTest()
         {
             //Homepage object initialization and definition
-            homePage homePageobj = new homePage();
-            homePageobj.navigateTotmPortal(driver);
+           // homePage homePageobj = new homePage();
+            //homePageobj.navigateTotmPortal(driver);
 
             TMpage TMpageObj = new TMpage();
             TMpageObj.deleteRecord(driver);

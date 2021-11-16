@@ -70,16 +70,17 @@ namespace TurnUpPortalFirstAutomation.Pages
 
             Assert.That(createdEmployeeName.Text == "Hinduja Global", "Created employee name doesn't match. Hence test case is failed");
             Assert.That(createdEmployeeUserName.Text == "Global123", "Created employee username doesn't match. Hence test case is failed");
-
+            Thread.Sleep(2000);
         }
 
         public void EditEmployee(IWebDriver driver)
         {
-            IWebElement goToLastTableButton = driver.FindElement(By.XPath("//*[@id='usersGrid']/div[4]/a[4]/span"));
-            goToLastTableButton.Click();
-            
-            //Click on edit button
-            Thread.Sleep(2000);
+            IWebElement recordTobeEdited = driver.FindElement(By.XPath("//*[@id='usersGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
+
+            if (recordTobeEdited.Text == "Hinduja Global")
+            {
+                //Click on edit button
+                Thread.Sleep(2000);
                 IWebElement employeeEdiButton = driver.FindElement(By.XPath("//*[@id='usersGrid']/div[3]/table/tbody/tr[last()]/td[3]/a[1]"));
                 employeeEdiButton.Click();
                 Thread.Sleep(1000);
@@ -126,11 +127,11 @@ namespace TurnUpPortalFirstAutomation.Pages
                 //Click on back to List
                 IWebElement backToList = driver.FindElement(By.XPath("//*[text()='Back to List']"));
                 backToList.Click();
-                Thread.Sleep(2000);
+                Thread.Sleep(1000);
 
                 //navigate to last page of the table
-                //IWebElement goToLastTableButton1 = driver.FindElement(By.XPath("//*[@id='usersGrid']/div[4]/a[4]/span"));
-                goToLastTableButton.Click();
+                IWebElement goToLastTableButton1 = driver.FindElement(By.XPath("//*[@id='usersGrid']/div[4]/a[4]/span"));
+                goToLastTableButton1.Click();
 
                 //now add the assertions.
                 IWebElement editedEmployeeName = driver.FindElement(By.XPath("//*[@id='usersGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
@@ -138,19 +139,47 @@ namespace TurnUpPortalFirstAutomation.Pages
 
                 Assert.That(editedEmployeeName.Text == "Global Hinduja", "Edited employee name hasn't been found. Hence test case is failed");
                 Assert.That(editedEmployeeUserName.Text == "NewWorld@123", "Employee username not edited successfully. Hence test case if failed");
-
+            
              
-            //}
-            //else
-            //{
-              //  Assert.Fail("Record to be edited hasn't found. Hence test case create employee failed.");
-            //}
+            }
+            else
+            {
+              Assert.Fail("Record to be edited hasn't found. Hence test case create employee failed.");
+            }
 
 
         }
 
         public void DeleteEmployee(IWebDriver driver)
         {
+            //Add the code for delete employee
+            //Go to Last page of the table
+            //IWebElement goToLastTableButton1 = driver.FindElement(By.XPath("//*[@id='usersGrid']/div[4]/a[4]/span"));
+            //goToLastTableButton1.Click();
+            Thread.Sleep(1000);
+
+            IWebElement editedRecordToBeDeleted = driver.FindElement(By.XPath("//*[@id='usersGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
+            if(editedRecordToBeDeleted.Text == "Global Hinduja")
+            {
+                //Click on Delete button
+                IWebElement deleteButton = driver.FindElement(By.XPath("//*[@id='usersGrid']/div[3]/table/tbody/tr[last()]/td[3]/a[2]"));
+                deleteButton.Click();
+
+                driver.SwitchTo().Alert().Accept();
+
+                Thread.Sleep(2000);
+                //Now add the assertions
+                IWebElement employeeNameDelete = driver.FindElement(By.XPath("//*[@id='usersGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
+                IWebElement employeeUsernameDelete = driver.FindElement(By.XPath("//*[@id='usersGrid']/div[3]/table/tbody/tr[last()]/td[2]"));
+
+                Assert.That(employeeNameDelete.Text != "Global Hinduja", "The employee name record hasn't been deleted, hence test case is failed");
+                Assert.That(employeeUsernameDelete.Text != "NewWorld@123", "The employee username record hasn't been deleted, hence test case is failed");
+            }
+            else
+            {
+                Assert.Fail("Employee record to be deleted hasn't been found, hence skipped to execute the test case");
+
+            }
 
 
         }

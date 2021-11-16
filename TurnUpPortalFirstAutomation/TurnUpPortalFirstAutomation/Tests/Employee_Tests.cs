@@ -8,10 +8,10 @@ using TurnUpPortalFirstAutomation.Utilities;
 namespace TurnUpPortalFirstAutomation.Tests
 {
     [TestFixture]
-    //[Parallelizable]
+    [Parallelizable]
     class Employee_Tests : CommonDriver
     {
-        [Test, Order(1)]
+        [Test, Order(1), Description("Check if user is able to create an Employee record with valid data")]
         public void CreateEmployeeTests()
         {
 
@@ -26,29 +26,31 @@ namespace TurnUpPortalFirstAutomation.Tests
 
         }
 
-        [Test, Order(2)]
+        [Test, Order(2), Description("Check if user is able to edit an existing Employee record")]
         public void EditemployeeTest()
         {
             //create obj for homepage
-            homePage HomePageObj = new homePage();
-            HomePageObj.goToEmployees(driver);
+           //homePage HomePageObj = new homePage();
+            //HomePageObj.goToEmployees(driver);
 
             //Edit employee
-            EmployeesPage employeePageobj = new EmployeesPage();
-            employeePageobj.EditEmployee(driver);
+             EmployeesPage employeePageobj = new EmployeesPage();
+             employeePageobj.EditEmployee(driver);
 
         }
-
-        [Test, Order(3)]
+        [Test, Order(3), Description("Check if user is able to delete an Employee record")]
         public void DeleteEmployeeTest()
         {
             //create obj for homepage
-            homePage HomePageObj = new homePage();
-            HomePageObj.goToEmployees(driver);
+           // homePage HomePageObj = new homePage();
+            //HomePageObj.goToEmployees(driver);
 
             //Delete Employee
             EmployeesPage employeePageobj = new EmployeesPage();
             employeePageobj.DeleteEmployee(driver);
+
         }
+
+
     }
 }
